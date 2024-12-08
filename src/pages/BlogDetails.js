@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getBlogById, editBlog, deleteBlog } from "../utils/api"; // Import the API functions
+import React, { useState, useEffect } from "react"; // React and hooks
+import { useParams, useNavigate } from "react-router-dom"; // Routing
+import { getBlogById, editBlog, deleteBlog } from "../utils/api"; // API functions
 
 const BlogDetails = () => {
   const [blog, setBlog] = useState(null); // State for blog details
@@ -12,6 +12,7 @@ const BlogDetails = () => {
   const { id } = useParams(); // Extract blog ID from URL
   const navigate = useNavigate(); // Navigation after delete or edit
 
+  // Fetch blog details
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -46,6 +47,7 @@ const BlogDetails = () => {
       const updatedData = await getBlogById(id); // Re-fetch the blog after saving
       setBlog(updatedData); // Update blog state with the new data
       setIsEditing(false); // Disable editing mode
+      alert("Blog updated successfully!");
     } catch (error) {
       setError("Failed to update blog");
     }
@@ -54,6 +56,7 @@ const BlogDetails = () => {
   const handleDelete = async () => {
     try {
       await deleteBlog(id); // Delete blog via API
+      alert("Blog deleted successfully!");
       navigate("/"); // Redirect to home page after deletion
     } catch (error) {
       setError("Failed to delete blog");
@@ -64,15 +67,15 @@ const BlogDetails = () => {
   if (error) return <div>{error}</div>; // Show error state if something goes wrong
 
   // Fallback values if authorDetails or date is missing
-  const authorName = blog.authorDetails ? blog.authorDetails.username : "Unknown Author";
-  const formattedDate = new Date(blog.createdAt).toLocaleDateString(); // Format the date correctly
+  const authorName = blog?.authorDetails?.username || "Unknown Author";
+  const formattedDate = blog?.createdAt ? new Date(blog.createdAt).toLocaleDateString() : "Invalid Date";
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6">{blog.title}</h1>
-      <p className="text-gray-300 mb-4">{blog.content}</p>
+      <h1 className="text-4xl font-bold mb-6">{blog?.title}</h1>
+      <p className="text-gray-300 mb-4">{blog?.content}</p>
       <p className="text-sm text-gray-500">
-        By {authorName} | {formattedDate} {/* Display formatted date and author */}
+        By {authorName} | {formattedDate}
       </p>
 
       {isEditing ? (
