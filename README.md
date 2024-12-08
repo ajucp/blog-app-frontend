@@ -62,7 +62,11 @@ The Blogging Application is a fully functional and responsive platform that enab
 
 1. **Clone the repository**:  
    ```bash
+<<<<<<< HEAD
    git clone <repo-url>
+=======
+   git clone https://github.com/ajucp/blog-app-frontend.git
+>>>>>>> 587cd1216048e371760f2d3e54a6c18ad0a69481
 
  **Navigate to the project folder:**
 
@@ -99,4 +103,8 @@ npm install
 
 **Visit the application:**
 
+<<<<<<< HEAD
 Access the app at http://localhost:3000.
+=======
+Access the app at http://localhost:3000.
+>>>>>>> 587cd1216048e371760f2d3e54a6c18ad0a69481
