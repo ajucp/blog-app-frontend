@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:5000/api"; // Base URL for your backend API
+const API_URL = "https://blog-app-backend-crav.onrender.com/api"; // Base URL for your backend API
 
 // Utility to get the authentication token from localStorage
 const getAuthToken = () => {
